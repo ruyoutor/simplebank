@@ -1,0 +1,14 @@
+version: '3'
+services:
+  postgres:
+    container_name: simplebank
+    image: postgres:12-alpine
+    volumes:
+      - ./db/simple_bank.sql:/docker-entrypoint-initdb.d/simple_bank.sql:ro
+    environment:
+      POSTGRES_DB: simplebank
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+        - 5432:5432
