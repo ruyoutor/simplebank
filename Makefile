@@ -23,5 +23,8 @@ sqlc:
 test:
 	go test -v -cover ./...
 
+server:
+	go run main.go
 
-.PHONY: postgres createdb migrateup migratedown docker-rm sqlc test
+
+.PHONY: postgres createdb migrateup migratedown docker-rm sqlc test server
