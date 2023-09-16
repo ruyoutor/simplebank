@@ -21,6 +21,7 @@ sqlc:
 	docker run -u $(shell id -u):$(shell id -g) --rm -v "$(shell pwd):/src"  -w "/src" sqlc/sqlc generate
 
 test:
+	go clean -cache
 	go test -v -cover ./...
 
 server:
