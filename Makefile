@@ -27,5 +27,10 @@ test:
 server:
 	go run main.go
 
+mock_install:
+	go install github.com/golang/mock/mockgen@v1.6.0
 
-.PHONY: postgres createdb migrateup migratedown docker-rm sqlc test server
+mock:
+	mockgen -package mockdb -destination db/mock/store.go github.com/techschool/simplebank/db/sqlc Store
+
+.PHONY: postgres createdb migrateup migratedown docker-rm sqlc test server mock_install mock
