@@ -46,7 +46,9 @@ jobs:
           migrate -version
 
       - name: Run migrations
-        run: make migrateup
+        run: |
+          cd db/
+          make migrateup
 
       - name: Test
         run: make test
