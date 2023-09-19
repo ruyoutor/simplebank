@@ -20,13 +20,10 @@ migrate_down:
 migrate_down_n:
 	migrate -path ./migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose down ${n}
 
-sqlc:
-	docker run -u $(shell id -u):$(shell id -g) --rm -v "$(shell pwd):/src"  -w "/src" sqlc/sqlc generate
-
 mock_install:
 	go install github.com/golang/mock/mockgen@v1.6.0
 
 mock:
-	mockgen -package mockdb -destination db/mock/store.go github.com/techschool/simplebank/db/sqlc Store
+	mockgen -package mockdb -destination ./mock/store.go github.com/techschool/simplebank/db/sqlc Store
 
-.PHONY: migrate_install migrate_create migrate_up migrate_up_n migrate_down migrate_down_n sqlc mock_install mock
+.PHONY: migrate_install migrate_create migrate_up migrate_up_n migrate_down migrate_down_n mock_install mock

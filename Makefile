@@ -11,6 +11,9 @@ docker-rm:
 	@docker stop postgres12
 	@docker rm postgres12
 
+sqlc:
+	docker run -u $(shell id -u):$(shell id -g) --rm -v "$(shell pwd):/src"  -w "/src" sqlc/sqlc generate
+
 test:
 	go clean -cache
 	go test -v -cover ./...
@@ -18,4 +21,4 @@ test:
 server:
 	go run main.go
 
-.PHONY: postgres createdb docker-rm test server
+.PHONY: postgres createdb docker-rm sqlc test server
