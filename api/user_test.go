@@ -43,7 +43,7 @@ func (e eqCreateUserParamsMatcher) String() string {
 }
 
 func EqCreateUserParams(arg db.CreateUserParams, password string) gomock.Matcher {
-	return eqCreateUserParamsMatcher{arg, password}
+	return eqCreateUserParamsMatcher{arg: arg, password: password}
 }
 
 func randomUser() (db.User, string) {
