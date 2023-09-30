@@ -4,21 +4,22 @@ on:
   push:
     branches: [ "main" ]
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
-  aws_cdk:
-    permissions:
-      id-token: write
-      contents: read
+  Build:
     runs-on: ubuntu-latest
     steps:
 
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@master
+        uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::437929532068:role/github-actions-rol
+          role-to-assume: arn:aws:iam::437929532068:role/github-actions-role
           aws-region: us-east-1
 
       - name: Build, tag, and push docker image to Amazon ECR
