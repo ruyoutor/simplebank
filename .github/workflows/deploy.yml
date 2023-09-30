@@ -12,15 +12,14 @@ jobs:
 
     steps:
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume: arn:aws:iam::437929532068:role/github-actions-role
-          aws-region: us-east-1
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Login to Amazon ECR Private
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2 # More information on this action can be found below in the 'AWS Credentials' section
+        with:
+          role-to-assume: arn:aws:iam::437929532068:role/github-actions-rol
+          aws-region: us-east-1
 
       - name: Build, tag, and push docker image to Amazon ECR
         env:
